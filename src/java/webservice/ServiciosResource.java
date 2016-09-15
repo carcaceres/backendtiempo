@@ -17,6 +17,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import servicio.Servicios;
 import servicio.Serviciosable;
@@ -79,9 +80,10 @@ public class ServiciosResource {
     @GET
     @Path("/climaciudad")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<DatosClima> mostrarDatosClimaCiudad(){
+    public List<DatosClima> mostrarDatosClimaCiudad(
+            @QueryParam("codciudad") String codigo){
          Serviciosable servicioCiudad=new Servicios();
-        return servicioCiudad.mostrarDatosClimasCiudad("10201");
+        return servicioCiudad.mostrarDatosClimasCiudad(codigo);
     }
     
     

@@ -102,7 +102,7 @@ public class DatosClimaCE{
             conn.close();
         } catch (SQLException ex) {
             System.out.println(ex);
-            lista = null;
+          // lista = null;
         }
 
         return lista;
