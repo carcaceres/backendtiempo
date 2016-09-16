@@ -5,9 +5,8 @@
  */
 package dao;
 
-import entidad.Ciudad;
-import entidad.Clima;
-import java.util.List;
+import entidad.DatosClima;
+import servicio.Servicios;
 
 /**
  *
@@ -20,15 +19,20 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       ClimaDao climaDao = new ClimaDao();
-        List<Clima> lista=climaDao.mostrarClimasCiudad();
-        for(Clima clima:lista){
-            
-            System.out.println("codigo ciudad:"+clima.getCelsius());
-            System.out.println("Nombre Ciudad "+clima.getFarenheit());
-        
-        }
+       
+        Servicios servicio = new Servicios();
+        DatosClima datosClima = new DatosClima();
+        datosClima.setCodCiudad("4001");
+        datosClima.setNomCiudad("calir");
+        datosClima.setIdestado(3);
+        datosClima.setCelsius(28);
+        datosClima.setProbprec(78);
+        datosClima.setHumedad(77);
+        datosClima.setViento(11);
+        System.out.println(servicio.nuevaClimaCiudad(datosClima));
         
     }
+    
+    
     
 }

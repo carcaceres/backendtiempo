@@ -8,10 +8,12 @@ package ce;
 import conexion.Conexion;
 import entidad.Ciudad;
 import entidad.DatosClima;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class DatosClimaCE{
         String sql="select codciudad,nomciudad,idestado,"
                 + "nomestado,celsius,farenheit,probprec,"
                 + "humedad,viento "
-                + "from vistadatosclima";
+                + "from vistadatosclima order by nomciudad asc";
         try {
             int id = 0;
 
@@ -108,4 +110,39 @@ public class DatosClimaCE{
         return lista;
     }
     
+     public int nuevaClimaCiudad(DatosClima datosClima) {
+        int ret = 0;
+
+        try {
+            // TODO code application logic here
+            String tsql = "{? = call NEWCIUDADCLIMA (?,?,?,?,?,?,?,?)}";
+            Conexion conexion = Conexion.getInstance();
+            Connection conn = conexion.conexionOracle();
+            CallableStatement cstmt = conn.prepareCall(tsql);
+            int f=(int)convertirFarenheit(datosClima.getCelsius());
+            cstmt.registerOutParameter(1, Types.INTEGER);
+            cstmt.setString(2, datosClima.getCodCiudad());
+            cstmt.setString(3, datosClima.getNomCiudad());
+            cstmt.setInt(4, datosClima.getIdestado());
+            cstmt.setInt(5, datosClima.getCelsius());
+            cstmt.setInt(6, f);
+            cstmt.setInt(7, datosClima.getProbprec());
+            cstmt.setInt(8, datosClima.getHumedad());
+            cstmt.setInt(9, datosClima.getViento());            
+
+            cstmt.executeUpdate();
+            ret = cstmt.getInt(1);
+            // System.out.println("retorno funcion " + ret);
+        } catch (SQLException ex) {
+            ret = -2;
+        }
+
+        return ret;
+    }
+    
+    
+    
+     public double convertirFarenheit(int grados){
+        return grados*1.8+32;
+    }
 }

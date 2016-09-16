@@ -18,6 +18,8 @@ import java.util.List;
 public interface Serviciosable {
 
     public List<Ciudad> mostrarCiudades();
+    
+    public String nuevaCiudad(Ciudad ciudad);
 
     public List<Estado> mostrarEstados();
 
@@ -26,4 +28,10 @@ public interface Serviciosable {
     public List<DatosClima> mostrarDatosClima();
     
     public List<DatosClima> mostrarDatosClimasCiudad(String codCiudad);
+    
+     public List<Ciudad> mostrarCiudad(String codCiudad);
+     
+      public String nuevaClimaCiudad(DatosClima datosClima);
+   
+    
 }

@@ -21,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import servicio.Servicios;
 import servicio.Serviciosable;
+import util.Mensaje;
 
 /**
  * REST Web Service
@@ -53,6 +54,8 @@ public class ServiciosResource {
         return servicioCiudad.mostrarCiudades();
     }
     
+   
+    
     @GET
     @Path("/mostrarestados")
     @Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +87,52 @@ public class ServiciosResource {
             @QueryParam("codciudad") String codigo){
          Serviciosable servicioCiudad=new Servicios();
         return servicioCiudad.mostrarDatosClimasCiudad(codigo);
+    }
+    
+     @GET
+    @Path("/nuevaciudad")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje mostrarDatosClimaCiudad(
+           
+            @QueryParam("codciudad") String codciudad,
+            @QueryParam("nomciudad") String nomciudad){
+         Mensaje mensaje=new Mensaje();
+        Ciudad ciudad=new Ciudad();
+        ciudad.setCodCiudad(codciudad);
+        ciudad.setNomCiudad(nomciudad);
+        Serviciosable servicioCiudad=new Servicios();
+        mensaje.setMensaje(servicioCiudad.nuevaCiudad(ciudad));
+        return mensaje;
+    }
+    
+    
+     @GET
+    @Path("/nuevaciudadclima")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje nuevaClimaCiudad(
+           
+            @QueryParam("codciudad") String codciudad,
+            @QueryParam("nomciudad") String nomciudad,
+            @QueryParam("idestado") int estado,
+            @QueryParam("celsius") int celsius,
+            @QueryParam("probprec") int probprec,
+            @QueryParam("humedad") int humedad,
+            @QueryParam("viento") int viento            
+            ){
+        
+         Mensaje mensaje=new Mensaje();
+        
+        Servicios servicio = new Servicios();
+        DatosClima datosClima = new DatosClima();
+        datosClima.setCodCiudad(codciudad);
+        datosClima.setNomCiudad(nomciudad);
+        datosClima.setIdestado(estado);
+        datosClima.setCelsius(celsius);
+        datosClima.setProbprec(probprec);
+        datosClima.setHumedad(humedad);
+        datosClima.setViento(viento);
+        mensaje.setMensaje(servicio.nuevaClimaCiudad(datosClima));         
+        return mensaje;
     }
     
     
