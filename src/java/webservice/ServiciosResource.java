@@ -122,7 +122,7 @@ public class ServiciosResource {
         
          Mensaje mensaje=new Mensaje();
         
-        Servicios servicio = new Servicios();
+        Serviciosable servicio = new Servicios();
         DatosClima datosClima = new DatosClima();
         datosClima.setCodCiudad(codciudad);
         datosClima.setNomCiudad(nomciudad);

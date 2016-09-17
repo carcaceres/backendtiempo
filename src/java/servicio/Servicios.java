@@ -87,7 +87,7 @@ public class Servicios implements Serviciosable {
             mensaje="Ingreso Ciudad Con Exito!!";
         }
         else if(ret==0){
-            mensaje="La Ciudad "+datosClima.getNomCiudad()+" Existe!!";
+            mensaje="El codigo "+datosClima.getCodCiudad()+" de La Ciudad digitada Existe!!";
         }
         else if(ret==-2){
             mensaje="Problemas en El Servicio consulte con el Administrador";
