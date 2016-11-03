@@ -5,10 +5,30 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-
-<init-param>
-    <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-    <param-value>cors.ResponseCorsFilter</param-value>
-</init-param>
-
+    
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>servlet.Upload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>dirUploadFiles</param-name>
+        <param-value>/public/images/avatar</param-value>
+    </context-param>
+    <context-param>
+        <param-name>maxFileSize</param-name>
+        <param-value>3000000</param-value>        
+    </context-param>
+  
 </web-app>

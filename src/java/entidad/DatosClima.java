@@ -20,6 +20,8 @@ public class DatosClima {
     private int probprec;
     private int humedad;
     private int viento;
+    private String url;
+    
 
     public String getCodCiudad() {
         return codCiudad;
@@ -91,6 +93,14 @@ public class DatosClima {
 
     public void setViento(int viento) {
         this.viento = viento;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     
     

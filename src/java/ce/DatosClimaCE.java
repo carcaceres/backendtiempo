@@ -30,7 +30,7 @@ public class DatosClimaCE{
         String sql="select codciudad,nomciudad,idestado,"
                 + "nomestado,celsius,farenheit,probprec,"
                 + "humedad,viento "
-                + "from vistadatosclima order by nomciudad asc";
+                + "from mostrarview order by nomciudad asc";
         try {
             int id = 0;
 
@@ -69,10 +69,13 @@ public class DatosClimaCE{
     
     public List<DatosClima> mostrarDatosClimasCiudad(String codCiudad) {
         List<DatosClima> lista = new ArrayList<DatosClima>();
-        String sql="select codciudad,nomciudad,idestado,"
-                + "nomestado,celsius,farenheit,probprec,"
-                + "humedad,viento "
-                + "from vistadatosclima where codciudad=?";
+       
+        
+       String sql="select codciudad,nomciudad,idestado,"
+               + "nomestado,celsius,farenheit,probprec,"
+               + "humedad,viento,url from vistadatosclima"
+               + " where codciudad=?";
+        
         try {
             int id = 0;
 
@@ -97,7 +100,8 @@ public class DatosClimaCE{
                 datosClima.setProbprec(rs.getInt(7));
                 datosClima.setHumedad(rs.getInt(8));
                 datosClima.setViento(rs.getInt(9));
-                lista.add(datosClima);
+                datosClima.setUrl(rs.getString(10));
+                 lista.add(datosClima);
             }
 
             pstmt.close();
